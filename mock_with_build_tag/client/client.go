@@ -2,10 +2,12 @@
 
 package client
 
+import "my/go-my-sandbox/mock_with_build_tag/domain"
+
 type C struct {
 }
 
-func NewClient() *C {
+func NewClient() domain.C {
 	return &C{}
 }
 
