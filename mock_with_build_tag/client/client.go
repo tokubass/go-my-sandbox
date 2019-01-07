@@ -1,4 +1,4 @@
-// +build production
+// +build !test
 
 package client
 

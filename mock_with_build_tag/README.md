@@ -1,7 +1,7 @@
 build tagでソースコードを切り替えることで、同名の関数を定義してもエラーにならない。これを利用してテスト時はmockコードに切り替える
 
 ```console
-$ go run --tags 'production' main.go
+$ go run  main.go
 production
 
 $ go test --tags 'test'  ./...
