@@ -40,7 +40,7 @@ func Set_Client_MockTag(f func() string) func() error {
 }
 
 func SetMockMethod(m *sync.Mutex, orig interface{}, mock interface{}) func() error {
-	m.Lock() //unlockせずにもう1回Lockを呼ぶとpanic発生
+	m.Lock()
 	rOrig := reflect.ValueOf(orig).Elem()
 	rMock := reflect.ValueOf(mock).Elem()
 	tmpOrig := rOrig.Interface()
