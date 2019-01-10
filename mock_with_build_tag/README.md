@@ -1,16 +1,16 @@
 3行まとめ
 - build tagでソースコードをファイル単位で切り替えることで、同名の関数を定義してもエラーにならない。これを利用してテスト時はmockコードに切り替える。
 - tagはファイルの先頭行にコメントで記載
-- go test --tag 'test' でtag指定できる ( go runやbuildのときは必要ない。`!test`にしているから）
+- `go test --tag 'test'` でtag指定できる ( go runやbuildのときは必要ない。`!test`にしているから）
 
 production実装とmockが乖離しないようにinterfaceを定義しておくことを強く推奨。
 
-####  --tag 'test' の場合
+###  --tag 'test' の場合
 `main_test.go`と`client/mock_client.go`が選ばれる
 
 mockの実装をグローパル変数に保持しているの単純な実装。parallelに実行されるとダメ。
 
-#### --tag 'use_lock'の場合
+### --tag 'use_lock'の場合
 `main_lock_test.go`と`client/mock_client_lock.go`が選ばれる
 
 parallel対応のため`mutex.Lock`を使用した。
@@ -19,6 +19,7 @@ LockするのでDBのmockなど頻繁に使うものには速度面で辛い。
 
 またテスト側でUnlockする必要がある。
 
+## 実行結果
 ```console
 $ go run main.go
 production
