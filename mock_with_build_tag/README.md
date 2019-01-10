@@ -1,5 +1,6 @@
 build tagでソースコードを切り替えることで、同名の関数を定義してもエラーにならない。これを利用してテスト時はmockコードに切り替える。
-ただしinterfaceを定義していない場合は新たに定義してやる必要がある。
+
+ただし、production実装とmockが乖離しないようにinterfaceを定義しておくこと。
 
 ```console
 $ go run main.go
