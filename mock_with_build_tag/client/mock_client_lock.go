@@ -36,12 +36,20 @@ func (c *C) Tag() string {
 var mutex sync.Mutex
 
 func Set_Client_MockTag(f func() string) func() error {
-	mutex.Lock() //unlockせずにもう1回Lockを呼ぶとpanic発生
+	return SetMockMethod(&mutex, &mockTag, &f)
+}
 
-	mockTag = f
+func SetMockMethod(m *sync.Mutex, orig interface{}, mock interface{}) func() error {
+	m.Lock() //unlockせずにもう1回Lockを呼ぶとpanic発生
+	rOrig := reflect.ValueOf(orig).Elem()
+	rMock := reflect.ValueOf(mock).Elem()
+	tmpOrig := rOrig.Interface()
+
+	rOrig.Set(rMock)
+
 	return func() error {
-		mockTag = defaultMockTag
-		mutex.Unlock()
+		rOrig.Set(reflect.ValueOf(tmpOrig))
+		m.Unlock()
 		return nil
 	}
 }
