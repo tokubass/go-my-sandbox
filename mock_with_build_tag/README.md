@@ -5,12 +5,12 @@
 
 production実装とmockが乖離しないようにinterfaceを定義しておくことを強く推奨。
 
-###  --tag 'test' の場合
+###  グローバル変数を使った単純実装 (--tag 'test')
 `main_test.go`と`client/mock_client.go`が選ばれる
 
 mockの実装をグローパル変数に保持しているの単純な実装。parallelに実行されるとダメ。
 
-### --tag 'use_lock'の場合
+### Mock実装の差し替えをLockする (--tag 'use_lock')
 `main_lock_test.go`と`client/mock_client_lock.go`が選ばれる
 
 parallel対応のため`mutex.Lock`を使用した。
